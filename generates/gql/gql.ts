@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "query GetPost($id: ID!) {\n  post(id: $id, idType: SLUG) {\n    id\n    databaseId\n    title\n    uri\n    date\n    content\n    featuredImage {\n      node {\n        id\n        sourceUrl\n        altText\n        mediaDetails {\n          width\n          height\n        }\n      }\n    }\n    author {\n      node {\n        name\n        email\n      }\n    }\n  }\n}": types.GetPostDocument,
     "query GetPostsEdges {\n  posts {\n    edges {\n      node {\n        id\n        title\n        date\n        slug\n        featuredImage {\n          node {\n            id\n            sourceUrl\n            altText\n            mediaDetails {\n              width\n              height\n            }\n          }\n        }\n        author {\n          node {\n            name\n            email\n          }\n        }\n      }\n    }\n  }\n}": types.GetPostsEdgesDocument,
 };
 
@@ -30,6 +31,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetPost($id: ID!) {\n  post(id: $id, idType: SLUG) {\n    id\n    databaseId\n    title\n    uri\n    date\n    content\n    featuredImage {\n      node {\n        id\n        sourceUrl\n        altText\n        mediaDetails {\n          width\n          height\n        }\n      }\n    }\n    author {\n      node {\n        name\n        email\n      }\n    }\n  }\n}"): (typeof documents)["query GetPost($id: ID!) {\n  post(id: $id, idType: SLUG) {\n    id\n    databaseId\n    title\n    uri\n    date\n    content\n    featuredImage {\n      node {\n        id\n        sourceUrl\n        altText\n        mediaDetails {\n          width\n          height\n        }\n      }\n    }\n    author {\n      node {\n        name\n        email\n      }\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

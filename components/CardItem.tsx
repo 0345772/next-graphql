@@ -9,6 +9,7 @@ import {
 import { GetPostsEdgesQuery } from "@/generates/gql/graphql";
 
 import Image from "next/image"
+import Link from 'next/link'
 
 type Props = {
   edge: NonNullable<GetPostsEdgesQuery['posts']>['edges'][number]
@@ -18,7 +19,10 @@ export default function CardItem({ edge }: Props) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{edge.node.title}</CardTitle>
+        {edge.node.slug && (
+          <CardTitle><Link href={`post/${edge.node.slug}`}>{edge.node.title}</Link></CardTitle>
+        )}
+
         <CardDescription>By {edge.node.author?.node.name}</CardDescription>
       </CardHeader>
       <CardContent className="relative h-96">
