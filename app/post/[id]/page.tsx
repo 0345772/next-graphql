@@ -9,10 +9,27 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Image from 'next/image'
+import { Metadata } from "next";
 
 async function getPost(id: string) {
   const { post } = await client.request(GetPostDocument, { id })
   return post
+}
+
+type Props = {
+  params: { id: string }
+}
+
+export async function generateMetadata(
+  { params }: Props,
+): Promise<Metadata> {
+  // read route params
+  const id = params.id
+  const post = await getPost(id)
+
+  return {
+    title: post?.title,
+  }
 }
 
 export default async function Page({ params: { id } }: { params: { id: string } }) {
@@ -36,7 +53,7 @@ export default async function Page({ params: { id } }: { params: { id: string } 
         <div dangerouslySetInnerHTML={{ __html: post?.content ? post?.content : '' }} className='mt-4'></div>
       </CardContent>
       <CardFooter className="mt-4">
-        <p>====+++=====card footer========+++++++++=============</p>
+        <p>====+++=====card footer========+++++++++step_65======+++=============</p>
       </CardFooter>
     </Card >
   )
