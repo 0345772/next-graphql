@@ -1,4 +1,4 @@
-import { GetPostDocument } from "@/generates/gql/graphql"
+import { GetPostDocument, GetPostsEdgesDocument } from "@/generates/gql/graphql"
 import { client } from "@/lib/requestClient"
 import {
   Card,
@@ -29,6 +29,15 @@ export async function generateMetadata(
 
   return {
     title: post?.title,
+  }
+}
+
+export async function generateStaticParams() {
+  const { posts } = await client.request(GetPostsEdgesDocument)
+  if (posts?.edges) {
+    return posts.edges.map((edge) => ({ id: edge.node.slug }))
+  } else {
+    return []
   }
 }
 
